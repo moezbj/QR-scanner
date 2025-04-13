@@ -6,6 +6,7 @@ import { t } from "i18next";
 const QrImageUploader: React.FC = () => {
   const [key, setKey] = useState<any>();
   const [decryptedResults, setDecryptedResults] = useState<any[]>([]);
+  const [decrypted, setDecrypt] = useState<string | null>(null);
 
   const decodeQRCodeFromImage = async (image: File) => {
     // Create a FileReader to read the uploaded image
@@ -109,7 +110,11 @@ const QrImageUploader: React.FC = () => {
             await decodeQRCodeFromImage(file);
           console.log("decodedQRCode", decodedQRCode);
           const decryptedData = await handleDecrypt(decodedQRCode.data);
-          results.push({ data: decryptedData, image: decodedQRCode.img });
+          results.push({
+            data: decryptedData,
+            image: decodedQRCode.img,
+            decrypt: decodedQRCode.data,
+          });
         } catch (error) {
           console.error(`Failed to process image: ${file.name}`, error);
         }
@@ -130,7 +135,7 @@ const QrImageUploader: React.FC = () => {
   }, []);
   return (
     <div style={{ padding: "10px" }}>
-      <h1 className="text-2xl mb-4">{t('scan.uploadFile')}</h1>
+      <h1 className="text-2xl mb-4">{t("scan.uploadFile")}</h1>
       <input
         type="file"
         multiple
@@ -145,6 +150,7 @@ const QrImageUploader: React.FC = () => {
         style={{ display: "none" }}
         onChange={handleUploadImages}
       />
+
       <div>
         {decryptedResults.length > 0 && (
           <ul>
@@ -156,6 +162,18 @@ const QrImageUploader: React.FC = () => {
                   className="my-4"
                   src={result.image}
                 />
+                <div
+                  style={{
+                    margin: "20px 0px",
+                    padding: "15px",
+                    border: "1px solid #ddd",
+                    borderRadius: "5px",
+                    maxWidth: "80%",
+                    lineBreak: "anywhere",
+                  }}
+                >
+                  <p>{result.decrypt}</p>
+                </div>
                 <p>{JSON.stringify(result.data)}</p>
               </li>
             ))}

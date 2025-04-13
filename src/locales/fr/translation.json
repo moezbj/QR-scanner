@@ -4,8 +4,8 @@
         "camScanner": "Scanner un QR code",
         "manuelScanner": "Lecteur Qr Code",
         "uploadScanner": "Télécharger images",
-        "create":"Creation QR code",
-        "settings": "Paramètres",
+        "create": "Creation QR code",
+        "settings": "Gestion des clés privées",
         "french": "Français",
         "english": "Anglais"
     },
@@ -32,7 +32,10 @@
         "download": "Télécharger",
         "loading": "Chargement",
         "save": "Sauvegarder",
-        "storedKey": "Clés stockées"
+        "storedKey": "Clés stockées",
+        "failedDecryption": "Le décryptage a échoué",
+        "msgFailed":"Le message crypté n'est pas valide."
+
     },
     "button": {
         "delete": "Supprimer",

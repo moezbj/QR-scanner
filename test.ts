@@ -14,10 +14,6 @@ export function isExistFile(uploadDir:string, fileName:string, isImage:boolean) 
       const fileNameBeforePipe = isImage
         ? file.name.trim()
         : file.name.split("~")[0].trim();
-        console.log('fileName', fileName)
-
-        console.log('fileNameBeforePipe', fileNameBeforePipe)
-
       const isFileNameMatch =
         (isImage ? fileNameBeforePipe.split(".")[0] : fileNameBeforePipe) ===
         fileName.split(".")[0];

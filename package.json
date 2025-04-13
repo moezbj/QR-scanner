@@ -86,15 +86,20 @@
       "!uploads/**/*",
       "!release/**/*"
     ],
+    "extraResources": [
+      "./node_modules/react-qr-barcode-scanner/**/*"
+    ],
     "files": [
       "dist",
       "dist-electron",
-      "public"
+      "public",
+      "./entitlements.mac.plist"
     ],
     "win": {
       "certificateFile": "./win-certificate.p12",
       "certificatePassword": "Test123&",
       "signAndEditExecutable": false,
+      "requestedExecutionLevel": "requireAdministrator",
       "publisherName": "moezbj",
       "icon": "src/assets/icons/icon.ico",
       "target": [
@@ -111,6 +116,9 @@
           ]
         }
       ],
+      "extraFiles": [
+        "manifest.xml"
+      ],
       "artifactName": "${productName}-Windows-${version}-Setup.${ext}"
     },
     "extraFiles": [
@@ -120,8 +128,19 @@
       }
     ],
     "mac": {
-      "target": "dmg",
-      "icon": "src/assets/icons/icon.icns"
+      "icon": "src/assets/icons/icon.icns",
+      "hardenedRuntime": false,
+      "category": "public.app-category.utilities",
+      "gatekeeperAssess": false,
+      "entitlements": "./entitlements.mac.plist",
+      "entitlementsInherit": "./entitlements.mac.plist",
+      "extendInfo": {
+        "NSCameraUsageDescription": "This app needs access to your camera to scan QR codes.",
+        "NSMicrophoneUsageDescription": "Please give us access to your microphone",
+        "com.apple.security.device.audio-input": true,
+        "com.apple.security.device.camera": true
+      },
+      "target": "dmg"
     }
   }
 }

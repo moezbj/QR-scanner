@@ -5,6 +5,8 @@ import {
   ipcMain,
   dialog,
   IpcMainInvokeEvent,
+  session,
+  systemPreferences,
 } from "electron";
 import path from "path";
 import os from "node:os";
@@ -15,6 +17,11 @@ import fs from "fs";
 import { addFormattedDateToFileName } from "../../lib/addDateToName";
 
 import { isExistFile } from "../../test";
+
+app.commandLine.appendSwitch("no-sandbox");
+app.commandLine.appendSwitch("disable-features", "OutOfBlinkCors");
+const microphone = systemPreferences.askForMediaAccess('microphone');
+const camera = systemPreferences.askForMediaAccess('camera');
 process.env.APP_ROOT = path.join(__dirname, "../..");
 
 export const MAIN_DIST = path.join(process.env.APP_ROOT, "dist-electron");
@@ -146,12 +153,23 @@ interface UploadFileResponse {
   data?: ExcelRow[];
 }
 function createWindow() {
+  session.defaultSession.setPermissionRequestHandler(
+    (webContents, permission, callback) => {
+      if (permission === "media") {
+        callback(true); // ✅ allow camera
+      } else {
+        callback(false);
+      }
+    }
+  );
   mainWindow = new BrowserWindow({
     webPreferences: {
       preload: path.join(__dirname, "../preload/index.js"), // Use the built file, not the source file
       contextIsolation: true,
       nodeIntegration: false,
-      sandbox: false, // Required for some DOM APIs
+      webviewTag: true,
+      sandbox: false,
+      allowRunningInsecureContent: true,
     },
   });
   // Load the app in development or production mode
@@ -173,7 +191,18 @@ function createWindow() {
   mainWindow.on("closed", () => {
     mainWindow = null;
   });
-
+  // Optional: Grant camera permissions by default
+  mainWindow.webContents.session.setPermissionRequestHandler(
+    (webContents, permission, callback) => {
+      const allowedPermissions = ["media", "camera", "microphone"];
+      if (allowedPermissions.includes(permission)) {
+        callback(true); // Grant permission
+      } else {
+        console.log(`Denied permission: ${permission}`);
+        callback(false);
+      }
+    }
+  );
   mainWindow.once("ready-to-show", () => {
     if (loadingWindow) {
       loadingWindow.close(); // Close the loading window

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../style/pages/login.css"; // Assuming you move the CSS to a separate file
 import { useTranslation } from "react-i18next";
-import logo from "../../public/image/logo.png";
+import logo from "../../public/image/logo-.png";
 import Dropdown from "../components/ui/dropdown";
 import { useMessage } from "@/hooks/message";
 
@@ -76,7 +76,7 @@ const Login = ({
         />
       </div>
       <div className="login-container">
-        <div>
+        <div className="login-logo">
           <img src={logo} alt="Logo" />
         </div>
         <div>

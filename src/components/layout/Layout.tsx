@@ -4,7 +4,7 @@ import "../../style/layouts/layout.css"; // Optional: for styling
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Dropdown from "../ui/dropdown";
-import logo from "../../../public/image/logo.png";
+import logo from "../../../public/image/logo-.png";
 
 interface LayoutProps {
   children: React.ReactNode;

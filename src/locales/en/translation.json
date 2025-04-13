@@ -3,9 +3,9 @@
         "title": "Admin Panel",
         "camScanner": "Scan a QR code",
         "manuelScanner": "QR Code Reader",
-        "uploadScanner": "Télécharger images",
+        "uploadScanner": "Upload images",
         "create":"Create QR code",
-        "settings": "Settings",
+        "settings": "Private key management",
         "french": "French",
         "english": "English"
     },
@@ -18,7 +18,7 @@
     "scan": {
         "QRSCANNER": "QR Code Scanner",
         "turnOff": "Turn Off Camera",
-        "turnOn": "Turn on Camera",
+        "turnON": "Turn on Camera",
         "barcodeScanner": "Barcode Scanner",
         "uploadFile": "Upload QR codes",
         "upload": "Choose a file",
@@ -30,7 +30,11 @@
         "publicKey": "Public key",
         "keySize": "Key size",
         "download": "Download",
-        "loading": "Loading"
+        "loading": "Loading",
+        "storedKey": "Stored Keys",
+        "failedDecryption": "Decryption failed",
+        "msgFailed":"Encrypted message is invalid."
+
     },
     "tableFile": {
         "NUMERO_COMPTE": "Account",
@@ -62,8 +66,7 @@
         "login": "Sign In",
         "select": "Select an option",
         "close": "Close",
-        "save":"Save",
-        "storedKey":"Stored Key"
+        "save":"Save"
 
     },
     "contact": "Contact Us",

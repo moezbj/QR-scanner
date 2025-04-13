@@ -47,6 +47,8 @@ const Settings = () => {
     window.electronAPI.receive("key-added", () => {
       window.electronAPI.send("get-keys");
       setLoadingSaving(false);
+      setPrivateKey("");
+      setPublicKey("");
     });
   };
   const handleDeleteKey = (id: number) => {
@@ -106,7 +108,7 @@ const Settings = () => {
             cursor: "pointer",
           }}
         >
-          {loading ? t('scan.loading') : t('scan.generate')}
+          {loading ? t("scan.loading") : t("scan.generate")}
         </button>
       </div>
 
@@ -125,7 +127,7 @@ const Settings = () => {
               color: "#000",
             }}
           >
-            <pre>{"pems"}</pre>
+            <pre>{privateKey}</pre>
           </div>
 
           <div style={{ display: "flex", gap: "20px", marginBottom: "30px" }}>
@@ -175,42 +177,46 @@ const Settings = () => {
               color: "#000",
             }}
           >
-            <pre>{"pem"}</pre>
+            <pre>{publicKey}</pre>
           </div>
         </div>
       )}
-      <h3 className="text-lg mb-4">{t('scan.storedKey')}</h3>
 
-      {keys.map(({ privateKey, publicKey, id }) => (
-        <div
-          key={id}
-          style={{
-            backgroundColor: "#f5f5f5",
-            padding: "15px",
-            borderRadius: "5px",
-            marginBottom: "20px",
-            wordBreak: "break-all",
-            maxHeight: "200px",
-            overflowY: "auto",
-            color: "#000",
-          }}
-        >
-          <button
-            onClick={() => handleDeleteKey(id)}
-            style={{
-              padding: "8px 16px",
-              backgroundColor: "#43D",
-              color: "white",
-              border: "none",
-              borderRadius: "4px",
-              cursor: "pointer",
-            }}
-          >
-            {t("button.delete")}
-          </button>
-          <pre>{JSON.parse(privateKey)}</pre>
-        </div>
-      ))}
+      {keys.length ? (
+        <>
+          <h3 className="text-lg mb-4">{t("scan.storedKey")}</h3>
+          {keys.map(({ privateKey, publicKey, id }) => (
+            <div
+              key={id}
+              style={{
+                backgroundColor: "#f5f5f5",
+                padding: "15px",
+                borderRadius: "5px",
+                marginBottom: "20px",
+                wordBreak: "break-all",
+                maxHeight: "200px",
+                overflowY: "auto",
+                color: "#000",
+              }}
+            >
+              <button
+                onClick={() => handleDeleteKey(id)}
+                style={{
+                  padding: "8px 16px",
+                  backgroundColor: "#43D",
+                  color: "white",
+                  border: "none",
+                  borderRadius: "4px",
+                  cursor: "pointer",
+                }}
+              >
+                {t("button.delete")}
+              </button>
+              <pre>{JSON.parse(privateKey)}</pre>
+            </div>
+          ))}
+        </>
+      ) : null}
     </div>
   );
 };

@@ -15,7 +15,9 @@
 }
 
 .sidebar .logo {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 10px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   background: lightslategrey;
@@ -54,7 +56,8 @@
   border-left: 4px solid #6a11cb;
 }
 .logo-container {
-  width: 230px;
+  width: 192px;
+  height: 128px;
 }
 
 .img-logo {

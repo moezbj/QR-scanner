@@ -1,24 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import BarcodeScannerComponent from "react-qr-barcode-scanner";
+
 import forge from "node-forge";
 import { t } from "i18next";
 
 const { util, pki, cipher } = forge;
 
 function QrScanner() {
+  const scannerRef = useRef(null);
   const [data, setData] = useState("Not Found");
-
   const [torchOn, setTorchOn] = useState(false);
   const [key, setKey] = useState<any>();
-
-  const [cameraFacing, setCameraFacing] = useState<"environment" | "user">(
-    "environment"
-  );
+  const [hasPermission, setHasPermission] = useState(false);
   const [webCamOn, setWebCamOn] = useState(false);
-
   const [decryptedResult, setDecryptedResult] = useState<string | null>(null);
   const [decrypted, setDecrypt] = useState<string | null>(null);
-
   const [isScanning, setIsScanning] = useState(true);
   const [error, setError] = useState("");
   useEffect(() => {
@@ -30,10 +26,54 @@ function QrScanner() {
       }
     );
   }, []);
+  const [errorCam, setErrorCam] = useState<string | null>(null);
+
+  useEffect(() => {
+    const checkCamera = async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: {
+            facingMode: "user",
+          },
+        });
+        stream.getTracks().forEach((track) => track.stop());
+        setHasPermission(true);
+      } catch (err: any) {
+        setErrorCam(`Camera access denied: ${err.message}`);
+      }
+    };
+
+    checkCamera();
+  }, []);
+
+  useEffect(() => {
+    navigator.mediaDevices.enumerateDevices().then((devices) => {
+      console.log(
+        "Video inputs:",
+        devices.filter((d) => d.kind === "videoinput")
+      );
+    });
+
+    navigator.mediaDevices
+      .getUserMedia({ video: true })
+      .then((stream) => {
+        console.log("CAMERA WORKS");
+      })
+      .catch((err) => {
+        console.error("CAMERA ERROR", err);
+      });
+  }, []);
+
+  if (errorCam) return <div className="error">{errorCam}</div>;
+  if (!hasPermission) return <div>Requesting camera access...</div>;
+
   const handleDecrypt = async (encryptedData: string) => {
-    console.log("encryptedData", encryptedData);
     try {
       // 1. Load keys
+      if (!key) {
+        setError("Clé privée non fournie pour décrypter le QR code");
+        return;
+      }
       const privateKeyPem = JSON.parse(key.privateKey);
       const privateKey = forge.pki.privateKeyFromPem(privateKeyPem);
 
@@ -83,11 +123,12 @@ function QrScanner() {
       return decryptedJSON;
     } catch (err) {
       console.error("❌ Decryption failed:", err);
+      setError(`❌ ${t("scan.failedDecryption")} ${t('scan.msgFailed')}`);
       setIsScanning(false); // Stop the scanner in case of failure
       return "Failed to decrypt!";
     }
   };
-
+  console.log("error", error);
   return (
     <div
       className="qr-scanner"
@@ -99,6 +140,7 @@ function QrScanner() {
         <button
           onClick={() => {
             setWebCamOn(!webCamOn);
+            setError("");
           }}
           style={{
             padding: "10px 20px",
@@ -113,7 +155,6 @@ function QrScanner() {
           {webCamOn ? t("scan.turnOff") : t("scan.turnON")}
         </button>
       </div>
-
       {webCamOn && (
         <div
           className="scanner-container"
@@ -129,10 +170,10 @@ function QrScanner() {
           {webCamOn && (
             <>
               <BarcodeScannerComponent
+                ref={scannerRef}
                 width="100%"
                 height="100%"
-                torch={torchOn}
-                facingMode={cameraFacing}
+                facingMode={"user"}
                 onUpdate={(err, result) => {
                   if (result) {
                     const resultText = (result as any).text;
@@ -145,10 +186,10 @@ function QrScanner() {
                 }}
               />
               {/* Overlay */}
-              <div className="qr-scanner-overlay">
+              {/*  <div className="qr-scanner-overlay">
                 <div className="qr-backdrop"></div>
                 <div className="qr-scan-square"></div>
-              </div>
+              </div> */}
             </>
           )}
         </div>
@@ -160,13 +201,13 @@ function QrScanner() {
             padding: "15px",
             border: "1px solid #ddd",
             borderRadius: "5px",
-            maxWidth:500,
-            lineBreak: "anywhere"          }}
+            maxWidth: 500,
+            lineBreak: "anywhere",
+          }}
         >
           <p>{decrypted}</p>
         </div>
       )}
-
       {decryptedResult && (
         <div
           style={{
@@ -182,8 +223,20 @@ function QrScanner() {
           </pre>
         </div>
       )}
-
-      {error && <div style={{ color: "red", margin: "20px 0" }}>{error}</div>}
+      {error && (
+        <div
+          style={{
+            color: "red",
+            backgroundColor: "#fff",
+            margin: "20px 0",
+            border: "1px solid red",
+            padding: "15px",
+            borderRadius: "20px",
+          }}
+        >
+          {error}
+        </div>
+      )}
     </div>
   );
 }
