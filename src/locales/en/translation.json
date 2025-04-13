@@ -1,0 +1,86 @@
+{
+    "sideBar": {
+        "title": "Admin Panel",
+        "camScanner": "Scan a QR code",
+        "manuelScanner": "QR Code Reader",
+        "uploadScanner": "Télécharger images",
+        "create":"Create QR code",
+        "settings": "Settings",
+        "french": "French",
+        "english": "English"
+    },
+    "login": {
+        "email": "Email",
+        "password": "Password",
+        "empty": "Please enter both email and password.",
+        "ERROR_CREDENTIALS": "Email or password is incorrect"
+    },
+    "scan": {
+        "QRSCANNER": "QR Code Scanner",
+        "turnOff": "Turn Off Camera",
+        "turnOn": "Turn on Camera",
+        "barcodeScanner": "Barcode Scanner",
+        "uploadFile": "Upload QR codes",
+        "upload": "Choose a file",
+        "generator": "RSA Key QR Generator",
+        "generate": "Generate key",
+        "recommended": "recommended",
+        "secure": "most secure",
+        "privateKey": "Private key",
+        "publicKey": "Public key",
+        "keySize": "Key size",
+        "download": "Download",
+        "loading": "Loading"
+    },
+    "tableFile": {
+        "NUMERO_COMPTE": "Account",
+        "NOM_CLIENT": "Client",
+        "NOMBRE_CARNET": "Carnet",
+        "NOMBRE_FEUILLE": "Paper",
+        "CODE_TRANSACTION": "Transaction",
+        "CODE_BANQUE": "Bank",
+        "CODE_AGENCE": "Agency",
+        "CODE_PAYS": "Country",
+        "ADR_CLIENT": "Adress",
+        "NUMERO_DEBUT_CHEQUE": "N° start",
+        "NUMERO_FIN_CHEQUE": "N° end",
+        "RIB": "RIB",
+        "CMC7": "CMC7",
+        "SERIES": "N° check",
+        "DEVISE": "Currency",
+        "SERIE": "serie"
+    },
+    "button": {
+        "delete": "Delete",
+        "clear": "Clear Filters",
+        "edit": "Edit",
+        "previous": "Previous",
+        "next": "Next",
+        "add": "Add",
+        "visualize": "Visualize",
+        "logout": "Logout",
+        "login": "Sign In",
+        "select": "Select an option",
+        "close": "Close",
+        "save":"Save",
+        "storedKey":"Stored Key"
+
+    },
+    "contact": "Contact Us",
+    "errors": {
+        "noData": "Require excel file",
+        "deletedFile": "File deleted successfully.",
+        "transactionCode": "different Transaction Code",
+        "printing": "Printing in progress",
+        "selectTemplate": "select template",
+        "selectPrinter": "Please select a printer.",
+        "selectFile": "Please select a file.",
+        "generatePdf": "Generate un PDF",
+        "uploadedPdf": "PDF uploaded successfully! Saved at:",
+        "errorUploading": "Error uploading PDF:",
+        "failedPdf": "Failed to generate or upload PDF.",
+        "templateName": "Required a name",
+        "templateFormat": "Required a format",
+        "templateBank": "Required a name"
+    }
+}

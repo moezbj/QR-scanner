@@ -1,0 +1,83 @@
+{
+    "sideBar": {
+        "title": "Espace Admin",
+        "camScanner": "Scanner un QR code",
+        "manuelScanner": "Lecteur Qr Code",
+        "uploadScanner": "Télécharger images",
+        "create":"Creation QR code",
+        "settings": "Paramètres",
+        "french": "Français",
+        "english": "Anglais"
+    },
+    "login": {
+        "email": "Email",
+        "password": "Mot de passe",
+        "empty": "Veuillez saisir votre adresse e-mail et votre mot de passe.",
+        "ERROR_CREDENTIALS": "Email ou mot de passe est incorrect"
+    },
+    "scan": {
+        "QRSCANNER": "Scanner de code QR",
+        "turnON": "Activer la caméra",
+        "turnOff": "Désactiver la caméra",
+        "barcodeScanner": "Scanner de codes-barres",
+        "uploadFile": "Télécharger des images",
+        "upload": "Choisir un fichier",
+        "generator": "Générateur de clé QR RSA",
+        "generate": "Générer la clé",
+        "recommended": "recommandé",
+        "secure": "le plus sécuriser",
+        "privateKey": "Clé privé",
+        "publicKey": "Clé public",
+        "keySize": "Taille de la clé",
+        "download": "Télécharger",
+        "loading": "Chargement",
+        "save": "Sauvegarder",
+        "storedKey": "Clés stockées"
+    },
+    "button": {
+        "delete": "Supprimer",
+        "clear": "réinitialiser",
+        "print": "Imprimer",
+        "edit": "Modifier",
+        "add": "Ajouter",
+        "logout": "Déconnection",
+        "login": "Se connecter",
+        "select": "Sélectionnez une option",
+        "close": "Fermer"
+    },
+    "tableFile": {
+        "NUMERO_COMPTE": "Compte",
+        "NOM_CLIENT": "Client",
+        "NOMBRE_CARNET": "Carnet",
+        "NOMBRE_FEUILLE": "Feuille",
+        "CODE_TRANSACTION": "Transaction",
+        "CODE_BANQUE": "Banque",
+        "CODE_AGENCE": "Agence",
+        "CODE_PAYS": "Pays",
+        "ADR_CLIENT": "Addresse",
+        "NUMERO_DEBUT_CHEQUE": "N° début",
+        "NUMERO_FIN_CHEQUE": "N° fin",
+        "RIB": "RIB",
+        "CMC7": "CMC7",
+        "SERIES": "N°: Chéque",
+        "DEVISE": "Devise",
+        "SERIE": "Serie"
+    },
+    "errors": {
+        "noData": "Importer une fichier excel",
+        "deletedFile": "Fichier supprimé avec succès.",
+        "transactionCode": "Code de transaction différent",
+        "printing": "Impression en cours",
+        "selectTemplate": "sélectionner un modèle",
+        "selectPrinter": "Veuillez sélectionner une imprimante.",
+        "selectFile": "Veuillez sélectionner un fichier.",
+        "generatePdf": "Générer un PDF",
+        "uploadedPdf": "PDF téléchargé avec succès ! Enregistré à :",
+        "errorUploading": "Erreur lors du téléchargement du PDF :",
+        "failedPdf": "Failed to generate or upload PDF.",
+        "templateName": "Saisir un nom",
+        "templateFormat": "Saisir un format",
+        "templateBank": "Saisir une banque"
+    },
+    "contact": "Contact Us"
+}
